@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Image, NavDropdown, Dropdown } from "react-bootstrap";
+import { Navbar, Nav, Image, Dropdown } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
 import { FaUserAlt, FaPhoneAlt, FaShoppingCart } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
@@ -57,7 +57,7 @@ const NavBar = ({ cartTotalQty }) => {
   const logout = () => {
     localStorage.removeItem("user");
     history.push("/");
-    history.go(0);
+    // history.go(0);
   };
   return (
     <>
@@ -82,10 +82,10 @@ const NavBar = ({ cartTotalQty }) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1" href="/profile">
+                  <Dropdown.Item eventKey="1" as={Link} to="/profile">
                     Profile
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="2" href="/profile/orders">
+                  <Dropdown.Item eventKey="2" as={Link} to="/profile/orders">
                     Orders
                   </Dropdown.Item>
                   <Dropdown.Item eventKey="3" onClick={logout}>
@@ -105,7 +105,7 @@ const NavBar = ({ cartTotalQty }) => {
         </ul>
       </div>
       <Navbar bg="light" expand="lg" sticky="top" className="header-nav">
-        <Navbar.Brand href="/" className="m-0">
+        <Navbar.Brand as={Link} to="/" className="m-0">
           <Image
             responsive="true"
             src={process.env.PUBLIC_URL + "/logo-198x66.png"}
@@ -121,7 +121,8 @@ const NavBar = ({ cartTotalQty }) => {
               return (
                 <Nav.Link
                   key={id}
-                  href={url}
+                  as={Link}
+                  to={url}
                   className={
                     `mx-2 font-weight-bold d-flex align-items-center justify-content-md-center ` +
                     (id === 5 ? `cart-icon ` : ``) +
@@ -132,34 +133,6 @@ const NavBar = ({ cartTotalQty }) => {
                 </Nav.Link>
               );
             })}
-            {user === null ? (
-              <React.Fragment>
-                <Nav.Link
-                  href="/login"
-                  className="mx-2 font-weight-bold d-md-none d-flex align-items-center justify-content-md-center"
-                >
-                  Log in
-                </Nav.Link>
-                <Nav.Link
-                  href="/login"
-                  className="mx-2 font-weight-bold d-flex d-md-none align-items-center justify-content-md-center"
-                >
-                  Log out
-                </Nav.Link>
-              </React.Fragment>
-            ) : (
-              <NavDropdown
-                title="Account"
-                id="basic-nav-dropdown"
-                className="dropdown-sm d-md-none  mx-2 font-weight-bold d-flex flex-column align-items-start"
-              >
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/profile/orders">
-                  Orders
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={logout}>Log out</NavDropdown.Item>
-              </NavDropdown>
-            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

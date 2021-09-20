@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { MenuShortcutData } from "./MenuShortcutData";
+import { Link } from "react-router-dom";
 const MenuShortcut = () => {
   return (
     <section className="p-5">
@@ -9,7 +10,7 @@ const MenuShortcut = () => {
         {MenuShortcutData.map((item, index) => {
           const { img, title, icon, url } = item;
           return (
-            <a key={index} href={url} className="col-12 col-md-6 col-lg-4 p-3">
+            <Link key={index} to={url} className="col-12 col-md-6 col-lg-4 p-3">
               <Card className=" justify-content-center">
                 <Card.Img
                   variant="top"
@@ -23,7 +24,7 @@ const MenuShortcut = () => {
                   <span className="mt-2 menu-shortcut-title">{title}</span>
                 </Card.ImgOverlay>
               </Card>
-            </a>
+            </Link>
           );
         })}
       </div>

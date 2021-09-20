@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaGithub,
@@ -25,13 +25,13 @@ const Footer = () => {
             <h4 className="footer-title">Information</h4>
             <ul className="col-6 footer-menu-list mt-4 p-0 w-100">
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="/about">About Us</a>
+                <Link to="/Linkbout">About Us</Link>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -41,24 +41,24 @@ const Footer = () => {
             <div className="row mt-4 mx-0">
               <ul className="col-6 footer-menu-list p-0">
                 <li>
-                  <a href="/menu?category=pizza">Pizza</a>
+                  <Link to="/menu?category=pizza">Pizza</Link>
                 </li>
                 <li>
-                  <a href="/menu?category=spaghetti">Spaghetti</a>
+                  <Link to="/menu?category=spaghetti">Spaghetti</Link>
                 </li>
                 <li>
-                  <a href="/menu?category=burger">Burger</a>
+                  <Link to="/menu?category=burger">Burger</Link>
                 </li>
               </ul>
               <ul className="col-6 footer-menu-list p-0">
                 <li>
-                  <a href="/menu?category=rice">Rice</a>
+                  <Link to="/menu?category=rice">Rice</Link>
                 </li>
                 <li>
-                  <a href="/menu?category=dessert">Dessert</a>
+                  <Link to="/menu?category=dessert">Dessert</Link>
                 </li>
                 <li>
-                  <a href="/menu?category=drink">Drink</a>
+                  <Link to="/menu?category=drink">Drink</Link>
                 </li>
               </ul>
             </div>

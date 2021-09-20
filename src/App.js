@@ -10,18 +10,20 @@ import Checkout from "./components/Checkout/Checkout";
 import Profile from "./components/User/Profile";
 import Orders from "./components/User/Order";
 import Footer from "./components/Footer/Footer";
-import { Router, Switch, Route } from "react-router-dom";
+// import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import EditProfile from "./components/User/EditProfile";
 import ChangePassword from "./components/User/ChangePassword";
 import OrderDetails from "./components/User/OrderDetails";
-import { createBrowserHistory } from "history";
+// import { createBrowserHistory } from "history";
 import axios from "axios";
 import ForgotPassword from "./components/Authentication/ForgotPassword";
 import ResetPassword from "./components/Authentication/ResetPassword";
-const history = createBrowserHistory({
-  forceRefresh: true,
-});
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+// const history = createBrowserHistory({
+//   forceRefresh: true,
+// });
 const UNAUTHORIZED = 401;
 
 axios.interceptors.response.use(
@@ -30,7 +32,8 @@ axios.interceptors.response.use(
     const { status } = error.response;
     if (status === UNAUTHORIZED) {
       localStorage.removeItem("user");
-      history.push("/login");
+      // history.push("/login");
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
@@ -80,55 +83,58 @@ function App() {
   }, [cart]);
 
   return (
-    <Router history={history}>
-      <NavBar cartTotalQty={cart.totalQty} />
-      <Switch>
-        <Route path="/" exact>
-          <Home addItemToCart={addItemToCart} />
-        </Route>
-        <Route path="/menu" exact>
-          <Menu addItemToCart={addItemToCart} />
-        </Route>
-        <Route path="/cart" exact>
-          <Cart cart={cart} setCart={setCart} />
-        </Route>
-        <Route path="/menu/:id" exact>
-          <ProductDetails addItemToCart={addItemToCart} />
-        </Route>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-        <Route path="/signup" exact>
-          <Signup />
-        </Route>
-        <Route path="/forgot-password" exact>
-          <ForgotPassword />
-        </Route>
-        <Route path="/reset-password/:token" exact>
-          <ResetPassword />
-        </Route>
-        <Route path="/profile" exact>
-          <Profile />
-        </Route>
-        <Route path="/profile/orders" exact>
-          <Orders />
-        </Route>
-        <Route path="/profile/orders/:id" exact>
-          <OrderDetails />
-        </Route>
-        <Route path="/profile/edit" exact>
-          <EditProfile />
-        </Route>
-        <Route path="/profile/change-password" exact>
-          <ChangePassword />
-        </Route>
-
-        <Route path="/checkout" exact>
-          <Checkout cart={cart} setCart={setCart} />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
+    // <Router history={history}>
+    <>
+      <Router>
+        <ScrollToTop />
+        <NavBar cartTotalQty={cart.totalQty} />
+        <Switch>
+          <Route path="/" exact>
+            <Home addItemToCart={addItemToCart} />
+          </Route>
+          <Route path="/menu" exact>
+            <Menu addItemToCart={addItemToCart} />
+          </Route>
+          <Route path="/cart" exact>
+            <Cart cart={cart} setCart={setCart} />
+          </Route>
+          <Route path="/menu/:id" exact>
+            <ProductDetails addItemToCart={addItemToCart} />
+          </Route>
+          <Route path="/login" exact>
+            <Login />
+          </Route>
+          <Route path="/signup" exact>
+            <Signup />
+          </Route>
+          <Route path="/forgot-password" exact>
+            <ForgotPassword />
+          </Route>
+          <Route path="/reset-password/:token" exact>
+            <ResetPassword />
+          </Route>
+          <Route path="/profile" exact>
+            <Profile />
+          </Route>
+          <Route path="/profile/orders" exact>
+            <Orders />
+          </Route>
+          <Route path="/profile/orders/:id" exact>
+            <OrderDetails />
+          </Route>
+          <Route path="/profile/edit" exact>
+            <EditProfile />
+          </Route>
+          <Route path="/profile/change-password" exact>
+            <ChangePassword />
+          </Route>
+          <Route path="/checkout" exact>
+            <Checkout cart={cart} setCart={setCart} />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </>
   );
 }
 
