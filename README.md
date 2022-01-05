@@ -1,2 +1,2 @@
 # E-commerce Website
-link: https://affectionate-mahavira-d8cede.netlify.app/
+link: https://fastfood-website.netlify.app
